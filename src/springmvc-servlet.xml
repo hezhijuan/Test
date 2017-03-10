@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+	<!-- 启用包扫描功能 扫描 @Controller等 -->
+	<context:component-scan base-package="cn.jbit.t20.controller" />
+	<!-- 启用注解驱动 扫描控制器类中的注解 如:@RequestMapping等 -->
+	<mvc:annotation-driven />
+
+	<!-- 将请求的URL和Bean名字映射 -->
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+
+	</bean>
+	<!-- 表示所有实现了org.springframework.web.servlet.mvc.Controller接口的Bean -->
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter">
+
+	</bean>
+	<!-- 视图解析器 ViewResolver 把输出结果与输出界面相融合，为表现层提供呈现资源 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+
+	<!-- <mvc:resources location="/images/" mapping="/images/**"/> -->
+	<mvc:default-servlet-handler />
+</beans>
